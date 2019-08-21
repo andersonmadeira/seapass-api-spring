@@ -8,42 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Entry implements Serializable {
+public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "pk_entry", sequenceName = "entry_seq", allocationSize = 1)
-	@GeneratedValue(generator = "pk_entry", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pk_credentials", sequenceName = "credentials_seq", allocationSize = 1)
+	@GeneratedValue(generator = "pk_credentials", strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "category_id")
-	private Category category;
-
-	@OneToOne(mappedBy = "entry")
-	private Credentials credentials;
-
-	@OneToMany(mappedBy = "entry")
-	private List<Extra> extras = new ArrayList<>();
-
-	public Entry() {
+	@JsonIgnore
+	@OneToMany(mappedBy = "category")
+	private List<Entry> entries = new ArrayList<>();
+	
+	public Category() {
 	}
 
-	public Entry(Long id, String name, Credentials credentials, List<Extra> extras) {
+	public Category(Long id, String name, List<Entry> entries) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.credentials = credentials;
-		this.extras = extras;
+		this.entries = entries;
 	}
 
 	public Long getId() {
@@ -62,28 +54,12 @@ public class Entry implements Serializable {
 		this.name = name;
 	}
 
-	public Category getCategory() {
-		return category;
+	public List<Entry> getEntries() {
+		return entries;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public Credentials getCredentials() {
-		return credentials;
-	}
-
-	public void setCredentials(Credentials credentials) {
-		this.credentials = credentials;
-	}
-
-	public List<Extra> getExtras() {
-		return extras;
-	}
-
-	public void setExtras(List<Extra> extras) {
-		this.extras = extras;
+	public void setEntries(List<Entry> entries) {
+		this.entries = entries;
 	}
 
 	@Override
@@ -102,7 +78,7 @@ public class Entry implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Entry other = (Entry) obj;
+		Category other = (Category) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
