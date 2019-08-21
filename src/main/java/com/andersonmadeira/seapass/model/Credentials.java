@@ -13,40 +13,40 @@ import javax.persistence.SequenceGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Access implements Serializable {
+public class Credentials implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "pk_access", sequenceName = "access_seq", allocationSize = 1)
-	@GeneratedValue(generator = "pk_access", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pk_credentials", sequenceName = "credentials_seq", allocationSize = 1)
+	@GeneratedValue(generator = "pk_credentials", strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String host;
+	private String hostname;
 
 	private String port;
 
-	private String user;
+	private String username;
 
-	private String pass;
+	private String password;
 
 	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "entry_id")
 	private Entry entry;
 	
-	public Access() {
+	public Credentials() {
 	}
 
-	public Access(Long id, String host, String port, String user, String pass, Entry entry) {
+	public Credentials(Long id, String hostname, String port, String username, String password, Entry entry) {
 		super();
 		this.id = id;
-		this.host = host;
+		this.hostname = hostname;
 		this.port = port;
-		this.user = user;
-		this.pass = pass;
+		this.username = username;
+		this.password = password;
 		this.entry = entry;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -55,12 +55,12 @@ public class Access implements Serializable {
 		this.id = id;
 	}
 
-	public String getHost() {
-		return host;
+	public String getHostname() {
+		return hostname;
 	}
 
-	public void setHost(String host) {
-		this.host = host;
+	public void setHostname(String hostname) {
+		this.hostname = hostname;
 	}
 
 	public String getPort() {
@@ -71,20 +71,20 @@ public class Access implements Serializable {
 		this.port = port;
 	}
 
-	public String getUser() {
-		return user;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUser(String user) {
-		this.user = user;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Entry getEntry() {
@@ -111,7 +111,7 @@ public class Access implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Access other = (Access) obj;
+		Credentials other = (Credentials) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -24,7 +24,7 @@ public class Entry implements Serializable {
 	private String name;
 
 	@OneToOne(mappedBy = "entry")
-	private Access access;
+	private Credentials credentials;
 
 	@OneToMany(mappedBy = "entry")
 	private List<Extra> extras = new ArrayList<>();
@@ -32,11 +32,11 @@ public class Entry implements Serializable {
 	public Entry() {
 	}
 
-	public Entry(Long id, String name, Access access, List<Extra> extras) {
+	public Entry(Long id, String name, Credentials credentials, List<Extra> extras) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.access = access;
+		this.credentials = credentials;
 		this.extras = extras;
 	}
 
@@ -56,12 +56,12 @@ public class Entry implements Serializable {
 		this.name = name;
 	}
 
-	public Access getAccess() {
-		return access;
+	public Credentials getCredentials() {
+		return credentials;
 	}
 
-	public void setAccess(Access access) {
-		this.access = access;
+	public void setCredentials(Credentials credentials) {
+		this.credentials = credentials;
 	}
 
 	public List<Extra> getExtras() {

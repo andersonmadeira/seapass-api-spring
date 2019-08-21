@@ -23,7 +23,7 @@ public class Extra implements Serializable {
 
 	private String key;
 
-	private Access value;
+	private Credentials value;
 
 	@JsonIgnore
 	@ManyToOne
@@ -33,7 +33,7 @@ public class Extra implements Serializable {
 	public Extra() {
 	}
 
-	public Extra(Long id, String key, Access value, Entry entry) {
+	public Extra(Long id, String key, Credentials value, Entry entry) {
 		super();
 		this.id = id;
 		this.key = key;
@@ -57,11 +57,11 @@ public class Extra implements Serializable {
 		this.key = key;
 	}
 
-	public Access getValue() {
+	public Credentials getValue() {
 		return value;
 	}
 
-	public void setValue(Access value) {
+	public void setValue(Credentials value) {
 		this.value = value;
 	}
 
