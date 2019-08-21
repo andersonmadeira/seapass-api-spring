@@ -1,4 +1,4 @@
-package andersonmadeira.com.seapass.model;
+package com.andersonmadeira.seapass.model;
 
 import java.io.Serializable;
 
@@ -7,43 +7,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Access implements Serializable {
+public class Extra implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "pk_access", sequenceName = "access_seq", allocationSize = 1)
-	@GeneratedValue(generator = "pk_access", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pk_extra", sequenceName = "extra_seq", allocationSize = 1)
+	@GeneratedValue(generator = "pk_extra", strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String host;
+	private String key;
 
-	private String port;
-
-	private String user;
-
-	private String pass;
+	private Access value;
 
 	@JsonIgnore
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "entry_id")
 	private Entry entry;
 	
-	public Access() {
+	public Extra() {
 	}
 
-	public Access(Long id, String host, String port, String user, String pass, Entry entry) {
+	public Extra(Long id, String key, Access value, Entry entry) {
 		super();
 		this.id = id;
-		this.host = host;
-		this.port = port;
-		this.user = user;
-		this.pass = pass;
+		this.key = key;
+		this.value = value;
 		this.entry = entry;
 	}
 
@@ -55,36 +49,20 @@ public class Access implements Serializable {
 		this.id = id;
 	}
 
-	public String getHost() {
-		return host;
+	public String getKey() {
+		return key;
 	}
 
-	public void setHost(String host) {
-		this.host = host;
+	public void setKey(String key) {
+		this.key = key;
 	}
 
-	public String getPort() {
-		return port;
+	public Access getValue() {
+		return value;
 	}
 
-	public void setPort(String port) {
-		this.port = port;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setValue(Access value) {
+		this.value = value;
 	}
 
 	public Entry getEntry() {
@@ -111,7 +89,7 @@ public class Access implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Access other = (Access) obj;
+		Extra other = (Extra) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

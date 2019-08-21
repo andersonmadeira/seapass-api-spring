@@ -1,4 +1,4 @@
-package andersonmadeira.com.seapass.model;
+package com.andersonmadeira.seapass.model;
 
 import java.io.Serializable;
 
@@ -7,37 +7,43 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Extra implements Serializable {
+public class Access implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "pk_extra", sequenceName = "extra_seq", allocationSize = 1)
-	@GeneratedValue(generator = "pk_extra", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "pk_access", sequenceName = "access_seq", allocationSize = 1)
+	@GeneratedValue(generator = "pk_access", strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String key;
+	private String host;
 
-	private Access value;
+	private String port;
+
+	private String user;
+
+	private String pass;
 
 	@JsonIgnore
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "entry_id")
 	private Entry entry;
 	
-	public Extra() {
+	public Access() {
 	}
 
-	public Extra(Long id, String key, Access value, Entry entry) {
+	public Access(Long id, String host, String port, String user, String pass, Entry entry) {
 		super();
 		this.id = id;
-		this.key = key;
-		this.value = value;
+		this.host = host;
+		this.port = port;
+		this.user = user;
+		this.pass = pass;
 		this.entry = entry;
 	}
 
@@ -49,20 +55,36 @@ public class Extra implements Serializable {
 		this.id = id;
 	}
 
-	public String getKey() {
-		return key;
+	public String getHost() {
+		return host;
 	}
 
-	public void setKey(String key) {
-		this.key = key;
+	public void setHost(String host) {
+		this.host = host;
 	}
 
-	public Access getValue() {
-		return value;
+	public String getPort() {
+		return port;
 	}
 
-	public void setValue(Access value) {
-		this.value = value;
+	public void setPort(String port) {
+		this.port = port;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 	public Entry getEntry() {
@@ -89,7 +111,7 @@ public class Extra implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Extra other = (Extra) obj;
+		Access other = (Access) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

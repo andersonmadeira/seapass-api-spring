@@ -1,4 +1,4 @@
-package andersonmadeira.com.seapass;
+package com.andersonmadeira.seapass;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

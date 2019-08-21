@@ -1,4 +1,4 @@
-package andersonmadeira.com.seapass.model;
+package com.andersonmadeira.seapass.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
